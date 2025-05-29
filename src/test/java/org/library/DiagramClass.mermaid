@@ -1,0 +1,44 @@
+classDiagram
+    class Book {
+        String id
+        String title
+        List~String~ authors
+        String description
+        String isbn
+        List~String~ genres
+    }
+
+    class BookRepository {
+        +List~Book~ getAll()
+        +void save(Book book)
+        +void update(Book book)
+        +void delete(String id)
+    }
+
+    class DBManager {
+        +Connection getConnection()
+        +void closeConnection()
+    }
+
+    class BookController {
+        +void start()
+        +void showBooks()
+        +void addBook()
+        +void editBook()
+        +void deleteBook()
+    }
+
+    class BookView {
+        +void showMenu()
+        +void showBooks(List~Book~ books)
+        +void showMessage(String message)
+    }
+
+    class Main {
+        +main(String[] args)
+    }
+
+    BookRepository --> DBManager
+    BookController --> BookRepository
+    BookController --> BookView
+    Main --|> BookController
