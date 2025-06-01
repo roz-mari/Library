@@ -1,22 +1,27 @@
 package org.library.model;
 
 import java.util.List;
+import org.library.controller.BookController;
 
 public class Book {
     private String id;
     private String title;
-    private List<String> authors;
+    private List <String> authors;
     private String description;
     private String isbn;
     private List<String> genres;
 
-    public Book(String id, String title, List<String> authors, String description, String isbn, List<String> genres) {
+    public Book(String id, String title, List <String> authors, String description, String isbn, List <String> genres) {
         this.id = id;
         this.title = title;
         this.authors = authors;
-        setDescription(description); // to enforce max 200 characters
+        this.description = description;
         this.isbn = isbn;
         this.genres = genres;
+    }
+
+    public Book(String title, List<String> authors, String description, String isbn, List<String> genres) {
+        this(null, title, authors, description, isbn, genres);
     }
 
     public String getId() {
