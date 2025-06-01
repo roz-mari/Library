@@ -14,7 +14,6 @@ public class BookRepository {
     }
     private String id;
 
-
     public boolean existsById(String id) throws SQLException {
             String sql = "SELECT COUNT(*) FROM books WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
