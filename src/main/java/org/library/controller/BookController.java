@@ -46,6 +46,7 @@ public class BookController {
             System.out.println("Database error while updating book: " + e.getMessage());
         }
     }
+
     public void deleteBook(String id) {
         try {
             repository.deleteBook(id);

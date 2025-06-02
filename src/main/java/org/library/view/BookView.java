@@ -108,6 +108,7 @@ public class BookView {
         List<String> genres = Arrays.asList(scanner.nextLine().split("\\s*,\\s*"));
         return new Book(null, title, authors, description, isbn, genres);
     }
+
     private Book readBookWithId(String id) {
         Book book = readBookWithoutId();
         book.setId(id);
