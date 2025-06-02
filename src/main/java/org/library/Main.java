@@ -15,7 +15,6 @@ public class Main {
         BookController controller = new BookController(repository);
         BookView view = new BookView(controller);
         controller.setView(view);
-
         view.start();
     }
 }

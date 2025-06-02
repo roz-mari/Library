@@ -72,7 +72,6 @@ public class BookRepository {
                 System.out.println("Book deleted successfully.");
             }
         }
-
         public List<Book> findAllBooks() throws SQLException {
             List<Book> books = new ArrayList<>();
             String sql = "SELECT * FROM books;";
