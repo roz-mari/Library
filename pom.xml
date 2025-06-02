@@ -16,7 +16,7 @@
   </properties>
 
   <dependencies>
-    <!-- JUnit -->
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
