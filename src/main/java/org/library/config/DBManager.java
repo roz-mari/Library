@@ -31,13 +31,6 @@ public class DBManager {
         return connection;
     }
     public static void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Connection closed.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error closing connection: " + e.getMessage());
         }
     }
 }

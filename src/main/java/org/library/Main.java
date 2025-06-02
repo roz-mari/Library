@@ -17,5 +17,4 @@ public class Main {
         controller.setView(view);
 
         view.start();
-    }
-}
+
