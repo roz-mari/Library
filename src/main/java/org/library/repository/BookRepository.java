@@ -42,7 +42,7 @@ public class BookRepository {
             }
         }
 
-    /*public void updateBook(String id, Book updatedBook) throws SQLException {
+    public void updateBook(String id, Book updatedBook) throws SQLException {
             if (!existsById(id)) {
                 System.out.println("Book updated successfully.");
                 return;
@@ -72,7 +72,7 @@ public class BookRepository {
                 System.out.println("Book deleted successfully.");
             }
         }
-*/
+
         public List<Book> findAllBooks() throws SQLException {
             List<Book> books = new ArrayList<>();
             String sql = "SELECT * FROM books;";
@@ -92,5 +92,5 @@ public class BookRepository {
             }
             return books;
         }
-    }
+}
 

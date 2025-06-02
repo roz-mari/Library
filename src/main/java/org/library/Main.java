@@ -18,6 +18,3 @@ public class Main {
 
         view.start();
 
-        DBManager.closeConnection();
-    }
-}
