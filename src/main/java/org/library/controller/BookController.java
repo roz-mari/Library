@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class BookController {
     private final BookRepository repository;
     private BookView view;
@@ -30,7 +29,7 @@ public class BookController {
     }
 
 
-    public List<Book> getALlBooks() {
+    public List<Book> getAllBooks() {
         try {
             return repository.findAllBooks();
         } catch (SQLException e) {
@@ -39,17 +38,29 @@ public class BookController {
         }
     }
 
-    public void updateBook(String id, Book updatedBook) {
+    /*public void updateBook(String id, Book updatedBook) {
         try {
             repository.updateBook(id, updatedBook);
         } catch (SQLException e) {
             System.out.println("Database error while updating book: " + e.getMessage());
         }
     }
-
-    public void deleteBook(String id) {
+*/
+    public void updateBook(String isbn) {
         try {
-            repository.deleteBook(id);
+            Book existingBook = repository.findByISBN(isbn);
+            if (existingBook == null) {
+                System.out.println("Book with ISBN not found.");
+                return;
+            }
+            repository.updateBook(isbn, existingBook);
+        } catch (SQLException e) {
+            System.out.println("Database error while updating book: " + e.getMessage());
+        }
+    }
+    public void deleteBook(String isbn) {
+        try {
+            repository.deleteBook(isbn);
         } catch (SQLException e) {
             System.out.println("Database error: " + e.getMessage());
         }

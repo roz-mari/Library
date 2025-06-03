@@ -52,7 +52,7 @@ public class BookView {
     }
 
     private void listBooks() {
-        List<Book> books = controller.getALlBooks();
+        List<Book> books = controller.getAllBooks();
         if (books.isEmpty()) {
             System.out.println("No books available.");
         } else {
@@ -69,18 +69,24 @@ public class BookView {
         askToContinue();
     }
 
-    private void updateBook() {
-        System.out.print("Enter ISBN of book to update: ");
+    /* private void updateBook() {
+        System.out.print("Enter Id of book to update: ");
         String isbn = scanner.nextLine();
-        Book book = readBookWithId(isbn);
+        Book book = readBookWithId(id);
         controller.updateBook(isbn, book);
         askToContinue();
     }
-
+*/
+    private void updateBook() {
+        System.out.print("Enter ISBN of book to update: ");
+        String isbn = scanner.nextLine();
+        controller.updateBook(isbn);
+        askToContinue();
+    }
     private void deleteBook() {
-        System.out.print("Enter Id of book to delete: ");
-        String id = scanner.nextLine();
-        controller.deleteBook(id);
+        System.out.print("Enter ISBN of book to delete: ");
+        String isbn = scanner.nextLine();
+        controller.deleteBook(isbn);
         askToContinue();
     }
 
