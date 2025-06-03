@@ -25,60 +25,60 @@ public class BookRepository {
         }
     }
 
-        public void addBook(Book book) throws SQLException {
-            if (!existsByIsbn(book.getIsbn())) {
-                String sql = "INSERT INTO books (title, authors, description, isbn, genres) VALUES (?, ?, ?, ?, ?)";
-                try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    statement.setString(1, book.getTitle());
-                    statement.setString(2, String.join(",", book.getAuthors()));
-                    statement.setString(3, book.getDescription());
-                    statement.setString(4, book.getIsbn());
-                    statement.setString(5, String.join(",", book.getGenres()));
-                    statement.executeUpdate();
-                    System.out.println("Book added successfully.");
-                }
-            } else {
-                System.out.println("Book already exists with this ISBN.");
-                return;
-            }
-        }
-        /* public void updateBook(String id, Book updatedBook) throws SQLException {
-            if (!existsById(id)) {
-                System.out.println("Book updated successfully.");
-                return;
-            }
-            String sql = "UPDATE books SET title=?, authors=?, description=?, genres=? WHERE id=?";
+    public void addBook(Book book) throws SQLException {
+        if (!existsByIsbn(book.getIsbn())) {
+            String sql = "INSERT INTO books (title, authors, description, isbn, genres) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, updatedBook.getTitle());
-                statement.setString(2, String.join(",", updatedBook.getAuthors()));
-                statement.setString(3, updatedBook.getDescription());
-                statement.setString(4, updatedBook.getIsbn());
-                statement.setString(5, String.join(",", updatedBook.getGenres()));
-                statement.setString(6, id);
+                statement.setString(1, book.getTitle());
+                statement.setString(2, String.join(",", book.getAuthors()));
+                statement.setString(3, book.getDescription());
+                statement.setString(4, book.getIsbn());
+                statement.setString(5, String.join(",", book.getGenres()));
                 statement.executeUpdate();
-                System.out.println("Book updated successfully.");
+                System.out.println("Book added successfully.");
             }
+        } else {
+            System.out.println("Book already exists with this ISBN.");
+            return;
         }
+    }
+    /* public void updateBook(String id, Book updatedBook) throws SQLException {
+        if (!existsById(id)) {
+            System.out.println("Book updated successfully.");
+            return;
+        }
+        String sql = "UPDATE books SET title=?, authors=?, description=?, genres=? WHERE id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, updatedBook.getTitle());
+            statement.setString(2, String.join(",", updatedBook.getAuthors()));
+            statement.setString(3, updatedBook.getDescription());
+            statement.setString(4, updatedBook.getIsbn());
+            statement.setString(5, String.join(",", updatedBook.getGenres()));
+            statement.setString(6, id);
+            statement.executeUpdate();
+            System.out.println("Book updated successfully.");
+        }
+    }
 */
-        public Book findByISBN(String isbn) throws SQLException {
-            String sql = "SELECT * FROM books WHERE ISBN = ?";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, isbn);
-                ResultSet rs = statement.executeQuery();
-                if (rs.next()) {
-                    return new Book(
-                            rs.getString("id"),
-                            rs.getString("title"),
-                            Arrays.asList(rs.getString("authors").split(",")),
-                            rs.getString("description"),
-                            rs.getString("isbn"),
-                            Arrays.asList(rs.getString("genres").split(","))
-                    );
-                } else {
-                    return null;
-                }
+    public Book findByISBN(String isbn) throws SQLException {
+        String sql = "SELECT * FROM books WHERE ISBN = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, isbn);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return new Book(
+                        rs.getString("id"),
+                        rs.getString("title"),
+                        Arrays.asList(rs.getString("authors").split(",")),
+                        rs.getString("description"),
+                        rs.getString("isbn"),
+                        Arrays.asList(rs.getString("genres").split(","))
+                );
+            } else {
+                return null;
             }
         }
+    }
     public void updateBook(String isbnToFind, Book originalBook) throws SQLException {
         if (!existsByIsbn(isbnToFind)) {
             System.out.println("Book not found.");
@@ -128,10 +128,10 @@ public class BookRepository {
         }
     }
     public void deleteBook(String isbn) throws SQLException {
-            if (!existsByIsbn(isbn)) {
-                System.out.println("Book not found.");
-                return;
-            }
+        if (!existsByIsbn(isbn)) {
+            System.out.println("Book not found.");
+            return;
+        }
         String sql = "DELETE FROM books WHERE isbn = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, isbn);
@@ -143,25 +143,25 @@ public class BookRepository {
             }
         }
     }
-        public List<Book> findAllBooks() throws SQLException {
-            List<Book> books = new ArrayList<>();
-            String sql = "SELECT * FROM books;";
-            try (Statement stmt = connection.createStatement();
-                 ResultSet rs = stmt.executeQuery(sql)) {
-                while (rs.next()) {
-                    Book book = new Book(
-                            rs.getString("id"),
-                            rs.getString("title"),
-                            Arrays.asList(rs.getString("authors").split(",")),
-                            rs.getString("description"),
-                            rs.getString("isbn"),
-                            Arrays.asList(rs.getString("genres").split(","))
-                    );
-                    books.add(book);
-                }
+
+    public List<Book> findAllBooks() throws SQLException {
+        List<Book> books = new ArrayList<>();
+        String sql = "SELECT * FROM books;";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Book book = new Book(
+                        rs.getString("id"),
+                        rs.getString("title"),
+                        Arrays.asList(rs.getString("authors").split(",")),
+                        rs.getString("description"),
+                        rs.getString("isbn"),
+                        Arrays.asList(rs.getString("genres").split(","))
+                );
+                books.add(book);
             }
-            return books;
         }
+        return books;
+    }
 
 }
-
