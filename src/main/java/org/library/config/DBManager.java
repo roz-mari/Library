@@ -29,6 +29,7 @@ public class DBManager {
             throw new RuntimeException(e);
         }
         return connection;
+
     }
     public static void closeConnection() {
         }
