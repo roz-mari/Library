@@ -69,14 +69,6 @@ public class BookView {
         askToContinue();
     }
 
-    /* private void updateBook() {
-        System.out.print("Enter Id of book to update: ");
-        String isbn = scanner.nextLine();
-        Book book = readBookWithId(id);
-        controller.updateBook(isbn, book);
-        askToContinue();
-    }
-*/
     private void updateBook() {
         System.out.print("Enter ISBN of book to update: ");
         String isbn = scanner.nextLine();
@@ -101,10 +93,14 @@ public class BookView {
         System.out.print("Authors: ");
         List<String> authors = Arrays.asList(scanner.nextLine().split("\\s*,\\s*"));
 
-        System.out.print("Description (max 200 chars): ");
-        String description = scanner.nextLine();
-        if (description.length() > 200) {
-            description = description.substring(0, 200);
+        String description;
+        while (true) {
+            System.out.print("Description (max 200 chars): ");
+            description = scanner.nextLine();
+            if (description.length() <= 200) {
+                break;
+            }
+            System.out.println("Error: Description is too long. Please enter up to 200 characters.");
         }
 
         System.out.print("ISBN: ");
